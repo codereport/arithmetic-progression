@@ -1,3 +1,5 @@
+// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=c8767789520f8b569298cef062b8556d
+
 use itertools::Itertools;
 use std::fmt::Display;
 
