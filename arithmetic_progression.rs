@@ -1,27 +1,21 @@
-// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=c8767789520f8b569298cef062b8556d
+// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=e57e29687a339003a20cbee8e120ca3c
 
 use itertools::Itertools;
-use std::fmt::Display;
+use std::{fmt::Display, ops::Sub};
 
-fn all_equal<T: PartialEq>(mut iter: impl Iterator<Item = T>) -> bool {
-    iter.next()
-        .map(|first| iter.all(|x| x == first))
-        .unwrap_or(false)
-}
-
-fn is_arithmetic_progression<T: Copy + PartialOrd + std::ops::Sub<Output = T> + PartialEq>(
-    nums: &[T],
+fn is_arithmetic_progression(
+    nums: impl IntoIterator<Item: Copy + PartialOrd + Sub<Output: PartialEq>>,
 ) -> bool {
-    all_equal(
-        nums.iter()
-            .copied()
-            .sorted_by(|a, b| a.partial_cmp(b).unwrap())
-            .tuple_windows()
-            .map(|(a, b)| b - a),
-    )
+    nums.into_iter()
+        .sorted_by(|a, b| a.partial_cmp(b).unwrap())
+        // Nightly Rust:
+        // .map_windows(|&[a, b]| b - a)
+        .tuple_windows()
+        .map(|(a, b)| b - a)
+        .all_equal()
 }
 
-fn print_result<T: Display>(example: usize, nums: &[T], result: bool) {
+fn print_result(example: usize, nums: &[impl Display], result: bool) {
     print!("Example {}:\nInput: [", example);
     for (i, num) in nums.iter().enumerate() {
         if i > 0 {
