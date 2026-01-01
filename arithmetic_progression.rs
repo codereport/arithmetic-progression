@@ -1,10 +1,10 @@
-// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=728dc7ff9604838c8fd48094e6128674
+// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=089f256c88db476e31d4f4a1ffcffb0b
 
 use itertools::Itertools;
 use std::fmt::Display;
 
-fn is_arithmetic_progression<T: Copy + PartialOrd + std::ops::Sub<Output = T> + PartialEq>(
-    nums: &[T],
+fn is_arithmetic_progression<T: Copy + PartialOrd + std::ops::Sub<Output = T>
+    + PartialEq>(nums: &[T],
 ) -> bool {
     nums.iter()
         .sorted_by(|a, b| a.partial_cmp(b).unwrap())
