@@ -6,12 +6,11 @@ use std::fmt::Display;
 fn is_arithmetic_progression<T: Copy + PartialOrd + std::ops::Sub<Output = T> + PartialEq>(
     nums: &[T],
 ) -> bool {
-    let mut iter = nums.iter()
+    nums.iter()
         .sorted_by(|a, b| a.partial_cmp(b).unwrap())
         .tuple_windows()
-        .map(|(a, b)| *b - *a);
-    let Some(first) = iter.next() else { return false; };
-    iter.all(|delta| delta == first)
+        .map(|(a, b)| *b - *a)
+        .all_equal()
 }
 
 fn print_result<T: Display>(example: usize, nums: &[T], result: bool) {
