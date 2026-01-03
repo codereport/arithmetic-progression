@@ -1,24 +1,16 @@
-// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=c8767789520f8b569298cef062b8556d
+// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=089f256c88db476e31d4f4a1ffcffb0b
 
 use itertools::Itertools;
 use std::fmt::Display;
 
-fn all_equal<T: PartialEq>(mut iter: impl Iterator<Item = T>) -> bool {
-    iter.next()
-        .map(|first| iter.all(|x| x == first))
-        .unwrap_or(false)
-}
-
-fn is_arithmetic_progression<T: Copy + PartialOrd + std::ops::Sub<Output = T> + PartialEq>(
-    nums: &[T],
+fn is_arithmetic_progression<T: Copy + PartialOrd + std::ops::Sub<Output = T>
+    + PartialEq>(nums: &[T],
 ) -> bool {
-    all_equal(
-        nums.iter()
-            .copied()
-            .sorted_by(|a, b| a.partial_cmp(b).unwrap())
-            .tuple_windows()
-            .map(|(a, b)| b - a),
-    )
+    nums.iter()
+        .sorted_by(|a, b| a.partial_cmp(b).unwrap())
+        .tuple_windows()
+        .map(|(a, b)| *b - *a)
+        .all_equal()
 }
 
 fn print_result<T: Display>(example: usize, nums: &[T], result: bool) {
