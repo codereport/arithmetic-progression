@@ -1,35 +1,30 @@
-// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=089f256c88db476e31d4f4a1ffcffb0b
+// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=b566dfe86b1744e6c14ad63efc7aa303
 
 use itertools::Itertools;
-use std::fmt::Display;
+use std::{fmt::Debug, ops::Sub};
 
-fn is_arithmetic_progression<T: Copy + PartialOrd + std::ops::Sub<Output = T>
-    + PartialEq>(nums: &[T],
+fn is_arithmetic_progression(
+    nums: impl IntoIterator<Item: Copy + PartialOrd + Sub<Output: PartialEq>>,
 ) -> bool {
-    nums.iter()
+    nums.into_iter()
         .sorted_by(|a, b| a.partial_cmp(b).unwrap())
+        // Nightly Rust:
+        // .map_windows(|&[a, b]| b - a)
         .tuple_windows()
-        .map(|(a, b)| *b - *a)
+        .map(|(a, b)| b - a)
         .all_equal()
 }
 
-fn print_result<T: Display>(example: usize, nums: &[T], result: bool) {
-    print!("Example {}:\nInput: [", example);
-    for (i, num) in nums.iter().enumerate() {
-        if i > 0 {
-            print!(", ");
-        }
-        print!("{}", num);
-    }
-    println!("]\nOutput: {}\n", result);
+fn print_result(example: usize, nums: impl Debug, result: bool) {
+    print!("Example {example}:\nInput: {nums:?}\nOutput: {result}\n");
 }
 
 fn main() {
-    let nums1 = vec![1, 3, 5, 7, 9];
-    let nums2 = vec![9, 1, 7, 5, 3];
-    let nums3 = vec![1, 2, 4, 8, 16];
-    let nums4 = vec![5, -1, 3, 1, -3];
-    let nums5 = vec![1.5, 3.0, 0.0, 4.5, 6.0];
+    let nums1 = [1, 3, 5, 7, 9];
+    let nums2 = [9, 1, 7, 5, 3];
+    let nums3 = [1, 2, 4, 8, 16];
+    let nums4 = [5, -1, 3, 1, -3];
+    let nums5 = [1.5, 3.0, 0.0, 4.5, 6.0];
 
     print_result(1, &nums1, is_arithmetic_progression(&nums1));
     print_result(2, &nums2, is_arithmetic_progression(&nums2));
