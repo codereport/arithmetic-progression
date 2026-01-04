@@ -6,7 +6,7 @@ This repo contains solutions to the Arithmetic Progression problem. It was cover
 It can be solved trivially if you have three algorithms:
 
 * sort
-* [deltas](https://hoogletranslate.com/?q=41&type=by-algo-id) or [map_adjacent](https://hoogletranslate.com/?q=5&type=by-algo-id)
+* [deltas](https://hoogletranslate.com/?q=5&type=by-algo-id&expr=true&libs=true) or [map_adjacent](https://hoogletranslate.com/?q=5&type=by-algo-id)
 * [all_equal](https://hoogletranslate.com/?q=51&type=by-algo-id)
 
 ### Array Language Solutions

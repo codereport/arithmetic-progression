@@ -1,4 +1,4 @@
-// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=e57e29687a339003a20cbee8e120ca3c
+// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=6dffd87fed6953f9e415195359683f3b
 
 use itertools::Itertools;
 use std::{fmt::Display, ops::Sub};
