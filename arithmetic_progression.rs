@@ -1,4 +1,4 @@
-// https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=b566dfe86b1744e6c14ad63efc7aa303
+// https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=9729edf14743236bf3e936225c8d7880
 
 use itertools::Itertools;
 use std::{fmt::Debug, ops::Sub};
@@ -8,10 +8,7 @@ fn is_arithmetic_progression(
 ) -> bool {
     nums.into_iter()
         .sorted_by(|a, b| a.partial_cmp(b).unwrap())
-        // Nightly Rust:
-        // .map_windows(|&[a, b]| b - a)
-        .tuple_windows()
-        .map(|(a, b)| b - a)
+        .map_windows(|&[a, b]| b - a)
         .all_equal()
 }
 
