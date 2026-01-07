@@ -1,19 +1,15 @@
 // https://godbolt.org/z/KvvY8fjcn
 
 #include <algorithm>
+#include <functional>
 #include <print>
 #include <ranges>
 #include <vector>
 
-auto all_equal(auto range) -> bool {
-    if (std::ranges::empty(range)) return false;
-    auto f = *std::ranges::begin(range);
-    return std::ranges::all_of(range, [f](auto val) { return val == f; });
-}
-
 auto is_arithmetic_progression(auto nums) -> bool {
     std::ranges::sort(nums);
-    return all_equal(nums | std::views::adjacent_transform<2>(std::minus{}));
+    auto diffs = nums | std::views::adjacent_transform<2>(std::minus{});
+    return std::ranges::adjacent_find(diffs, std::not_equal_to{}) == diffs.end();
 }
 
 int main() {
