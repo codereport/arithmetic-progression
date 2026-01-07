@@ -22,4 +22,5 @@ It can be solved trivially if you have three algorithms:
 |    BQN     |   `1=·≠∘⍷·-´˘2↕∧`    |
 | Dyalog APL |  `1=(≢∘∪2-/⊂⍤⍋⍛⌷)`   |
 |    BQN     |  `∧´·=´˘2↕·-´˘2↕∧`   |
+|     J      |  `1=[:#[:~.2-/\/:~`  |
 |   Jello    | `sort deltas all_eq` |
