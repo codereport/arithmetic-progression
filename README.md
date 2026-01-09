@@ -7,7 +7,7 @@ It can be solved trivially if you have three algorithms:
 
 * sort
 * [deltas](https://hoogletranslate.com/?q=5&type=by-algo-id&expr=true&libs=true) or [map_adjacent](https://hoogletranslate.com/?q=5&type=by-algo-id)
-* [all_equal](https://hoogletranslate.com/?q=51&type=by-algo-id)
+* [all_equal](https://hoogletranslate.com/?q=51&type=by-algo-id&expr=true&libs=true)
 
 ### Array Language Solutions
 
